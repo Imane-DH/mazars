@@ -1,0 +1,34 @@
+<div>
+  <label>Title</label>
+  <input type="text" name="title" value="<%= investment.title %>" />
+</div>
+<div>
+  <label>Country</label>
+  <select name="country">
+    <% countries.forEach(country => { %> <% if (country.id ===
+    investment.country) { %>
+    <option selected label="<%= country.name %>" value="<%= country.id %>">
+      <% } else { %>
+    </option>
+
+    <option label="<%= country.name %>" value="<%= country.id %>">
+      <% } %> <% }) %>
+    </option>
+  </select>
+</div>
+<div>
+  <label>Date</label>
+  <input
+    type="date"
+    name="Date"
+    value="<%= investment.publishDate == null ? '' : investment.publishDate.toISOString().split('T')[0] %>"
+  />
+</div>
+<div>
+  <label>File</label>
+  <input type="file" name="file" />
+</div>
+<div>
+  <label>Description</label>
+  <textarea name="description"><%= investment.description %></textarea>
+</div>
