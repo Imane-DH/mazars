@@ -1,10 +1,10 @@
 <h2>Search Investment</h2>
-<form action="/authors" method="GET">
+<form action="/investments" method="GET">
   <label>Title</label>
   <input type="text" name="name" value="<%= searchOptions.name %>" />
   <button type="submit">Search</button>
 </form>
 <br />
-<% authors.forEach(author => { %>
-<div><%= author.name %></div>
+<% investments.forEach(investment => { %>
+<div><%= investment.name %></div>
 <% }) %>
