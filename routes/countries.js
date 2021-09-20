@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     name: req.body.name,
   });
   try {
-    const newCountry = await Country.save();
+    const newCountry = await country.save();
 
     res.redirect(`countries`);
   } catch {
