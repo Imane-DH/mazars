@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const FilePath = "uploads/investmentFiles";
+
 const investmentSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -28,3 +30,4 @@ const investmentSchema = new mongoose.Schema({
   },
 });
 module.exports = mongoose.model("Investment", investmentSchema);
+module.exports.FilePath = FilePath;

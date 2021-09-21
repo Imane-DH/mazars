@@ -17,11 +17,15 @@
   </select>
 </div>
 <div>
-  <label>Date</label>
+  <label>Company</label>
+  <input type="text" name="company" />
+</div>
+<div>
+  <label>CreatedAt</label>
   <input
     type="date"
     name="Date"
-    value="<%= investment.publishDate == null ? '' : investment.publishDate.toISOString().split('T')[0] %>"
+    value="<%= investment.Date == null ? '' : investment.Date.toISOString().split('T')[0] %>"
   />
 </div>
 <div>
