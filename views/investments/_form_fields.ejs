@@ -18,14 +18,14 @@
 </div>
 <div>
   <label>Company</label>
-  <input type="text" name="company" />
+  <input type="text" name="company" value="<%= investment.company %>" />
 </div>
 <div>
   <label>CreatedAt</label>
   <input
     type="date"
-    name="Date"
-    value="<%= investment.Date == null ? '' : investment.Date.toISOString().split('T')[0] %>"
+    name="CreatedAt"
+    value="<%= investment.CreatedAt == null ? '' : investment.CreatedAt.toISOString().split('T')[0] %>"
   />
 </div>
 <div>

@@ -1,10 +1,25 @@
-<h2>Search Investment</h2>
+<h2>Search investment</h2>
 <form action="/investments" method="GET">
-  <label>Name</label>
-  <input type="text" name="name" value="<%= searchOptions.name %>" />
+  <div>
+    <label>Title</label>
+    <input type="text" name="title" value="<%= searchOptions.title %>" />
+  </div>
+  <div>
+    <label>CreatedAt</label>
+    <input
+      type="date"
+      name="CreatedAt"
+      value="<%= searchOptions.CreatedAt %>"
+    />
+  </div>
+  <div>
+    <label>Company</label>
+    <input type="text" name="company" value="<%= searchOptions.company %>" />
+  </div>
   <button type="submit">Search</button>
 </form>
-<br />
-<% countries.forEach(country => { %>
-<div><%= country.name %></div>
-<% }) %>
+<div>
+  <% investments.forEach(investment => { %>
+  <div><%= investment.title %></div>
+  <% }) %>
+</div>

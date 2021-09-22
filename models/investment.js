@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const path = require("path");
 const FilePath = "uploads/investmentFiles";
 
 const investmentSchema = new mongoose.Schema({
@@ -29,5 +29,12 @@ const investmentSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+investmentSchema.virtual("FilePath").get(function () {
+  if (this.UplodedfileName != null) {
+    return path.join("/", FilePath, this.fileName);
+  }
+});
+
 module.exports = mongoose.model("Investment", investmentSchema);
 module.exports.FilePath = FilePath;

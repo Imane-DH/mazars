@@ -4,12 +4,13 @@ const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const Investment = require("../models/investment");
+const Country = require("../models/country");
 const uploadPath = path.join("public", Investment.FilePath);
 const fileMimeTypes = [
   "application/vnd.ms-excel",
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 ];
-const Country = require("../models/country");
+
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
@@ -19,7 +20,15 @@ const upload = multer({
 
 // All investments Route
 router.get("/", async (req, res) => {
-  res.send("all Investments");
+  try {
+    const investments = await Investment.find({});
+    res.render("investments/index", {
+      investments: investments,
+      searchOptions: req.query,
+    });
+  } catch {
+    res.redirect("/");
+  }
 });
 
 // New investment Route
@@ -34,13 +43,13 @@ router.post("/", upload.single("file"), async (req, res) => {
     title: req.body.title,
     country: req.body.country,
     company: req.body.company,
+    CreatedAt: new Date(req.body.CreatedAt),
     UplodedfileName: fileName,
     description: req.body.description,
   });
-
   try {
     const newInvestment = await investment.save();
-    res.redirect("investments");
+    res.redirect("/investments");
   } catch {
     if (investment.UplodedfileName != null) {
       removeInvestmentFile(investment.UplodedfileName);
@@ -62,7 +71,8 @@ async function renderNewPage(res, investment, hasError = false) {
       countries: countries,
       investment: investment,
     };
-    if (hasError) params.errorMessage = "Error Creating Book";
+    //not working !!!!!!!!!!
+    if (hasError) params.errorMessage = "Error Creating Investment";
     res.render("investments/new", params);
   } catch {
     res.redirect("/investments");
