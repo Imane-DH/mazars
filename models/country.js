@@ -13,6 +13,8 @@ countrySchema.pre("remove", function (next) {
       next(err);
     } else if (investments.length > 0) {
       next(new Error("This Country / Organization has an investments still "));
+    } else {
+      next();
     }
   });
 });

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Country = require("../models/country");
+const Investment = require("../models/investment");
 
 // All countries Route
 router.get("/", async (req, res) => {
@@ -40,8 +41,19 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/:id", (req, res) => {
-  res.send("Show Country / Organization " + req.params.id);
+router.get("/:id", async (req, res) => {
+  try {
+    const country = await Country.findById(req.params.id);
+    const investments = await Investment.find({ country: country.id })
+      .limit(5)
+      .exec();
+    res.render("countries/show", {
+      country: country,
+      investmentsByCountry: investments,
+    });
+  } catch {
+    res.redirect("/");
+  }
 });
 
 router.get("/:id/edit", async (req, res) => {

@@ -1,18 +1,15 @@
 <div>
   <label>Title</label>
-  <input type="text" name="title" />
+  <input type="text" name="title" value="<%= investment.title %>" />
 </div>
 <div>
   <label>Country</label>
   <select name="country">
     <% countries.forEach(country => { %> <% if (country.id ===
     investment.country) { %>
-    <option
-      selected
-      label="<%= country.name %>"
-      value="<%= country.id %>"
-    ></option>
-    <% } else { %>
+    <option selected label="<%= country.name %>" value="<%= country.id %>">
+      <% } else { %>
+    </option>
 
     <option label="<%= country.name %>" value="<%= country.id %>">
       <% } %> <% }) %>

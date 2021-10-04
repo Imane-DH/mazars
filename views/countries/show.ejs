@@ -1,0 +1,8 @@
+<h2><%= country.name %></h2>
+<a href="/countries/<%= country.id %>/edit">Edit</a>
+<%- include('../partials/deleteForm', { url: `/countries/${country.id}`}) %> <%
+if (investmentsByCountry.length > 0) { %>
+<h2>Investments by country or organization</h2>
+<% investmentsByCountry.forEach(investment => { %>
+<div><%= investment.title %></div>
+<% }) %> <% } %>

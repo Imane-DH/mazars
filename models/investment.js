@@ -37,4 +37,5 @@ investmentSchema.virtual("FilePath").get(function () {
 });
 
 module.exports = mongoose.model("Investment", investmentSchema);
+
 module.exports.FilePath = FilePath;
