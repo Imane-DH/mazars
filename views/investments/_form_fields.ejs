@@ -1,15 +1,18 @@
 <div>
   <label>Title</label>
-  <input type="text" name="title" value="<%= investment.title %>" />
+  <input type="text" name="title" />
 </div>
 <div>
   <label>Country</label>
   <select name="country">
     <% countries.forEach(country => { %> <% if (country.id ===
     investment.country) { %>
-    <option selected label="<%= country.name %>" value="<%= country.id %>">
-      <% } else { %>
-    </option>
+    <option
+      selected
+      label="<%= country.name %>"
+      value="<%= country.id %>"
+    ></option>
+    <% } else { %>
 
     <option label="<%= country.name %>" value="<%= country.id %>">
       <% } %> <% }) %>
@@ -21,7 +24,7 @@
   <input type="text" name="company" value="<%= investment.company %>" />
 </div>
 <div>
-  <label>CreatedAt</label>
+  <label>Created At</label>
   <input
     type="date"
     name="CreatedAt"

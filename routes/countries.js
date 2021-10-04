@@ -31,13 +31,59 @@ router.post("/", async (req, res) => {
   });
   try {
     const newCountry = await country.save();
-
-    res.redirect(`countries`);
+    res.redirect(`countries/${newCountry.id}`);
   } catch {
     res.render("countries/new", {
       country: country,
       errorMessage: "Error creating country",
     });
+  }
+});
+
+router.get("/:id", (req, res) => {
+  res.send("Show Country / Organization " + req.params.id);
+});
+
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const country = await Country.findById(req.params.id);
+    res.render("countries/edit", { country: country });
+  } catch {
+    res.redirect("/countries");
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  let country;
+  try {
+    country = await Country.findById(req.params.id);
+    country.name = req.body.name;
+    await country.save();
+    res.redirect(`/countries/${country.id}`);
+  } catch {
+    if (country == null) {
+      res.redirect("/");
+    } else {
+      res.render("countries/edit", {
+        country: country,
+        errorMessage: "Error updating country",
+      });
+    }
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  let country;
+  try {
+    country = await Country.findById(req.params.id);
+    await country.remove();
+    res.redirect(`/countries`);
+  } catch {
+    if (country == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`countries/${country.id}`);
+    }
   }
 });
 

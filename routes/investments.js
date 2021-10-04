@@ -48,7 +48,7 @@ router.post("/", upload.single("file"), async (req, res) => {
     description: req.body.description,
   });
   try {
-    const newInvestment = await investment.save();
+    const newInvestment = await Investment.save(); // changed I
     res.redirect("/investments");
   } catch {
     if (investment.UplodedfileName != null) {
@@ -57,7 +57,7 @@ router.post("/", upload.single("file"), async (req, res) => {
     renderNewPage(res, investment, true);
   }
 });
-
+//STILL NOT WORKING !!!!!!!!!
 function removeInvestmentFile(fileName) {
   fs.unlink(path.join(uploadPath, fileName), (err) => {
     if (err) console.error(err);
@@ -67,12 +67,12 @@ function removeInvestmentFile(fileName) {
 async function renderNewPage(res, investment, hasError = false) {
   try {
     const countries = await Country.find({});
-    const params = {
+    let params = {
       countries: countries,
       investment: investment,
     };
-    //not working !!!!!!!!!!
-    if (hasError) params.errorMessage = "Error Creating Investment";
+    ///STILL NOT WORKING !!!!!!!!!!!
+    if (hasError) params = Error("Error Creating Investment"); // j'ai changé ça
     res.render("investments/new", params);
   } catch {
     res.redirect("/investments");

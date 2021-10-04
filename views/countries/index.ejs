@@ -7,4 +7,7 @@
 <br />
 <% countries.forEach(country => { %>
 <div><%= country.name %></div>
-<% }) %>
+<a href="/countries/<%= country.id %>"> View</a>
+<a href="/countries/<%= country.id %>/edit"> Edit </a>
+<%- include('../partials/deleteForm' , { url: `/countries/${country.id}`}) %> <%
+}) %>

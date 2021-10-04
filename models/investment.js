@@ -10,7 +10,7 @@ const investmentSchema = new mongoose.Schema({
   description: {
     type: String,
   },
-  Company: {
+  company: {
     type: String,
     required: true,
   },
