@@ -1,0 +1,8 @@
+<h2><%= filière.nom %></h2>
+<a href="/filières/<%= filière.id %>/edit">Modifier</a>
+<%- include('../partials/deleteForm', { url: `/filières/${filière.id}`}) %> <%
+if (investissementParFilière.length > 0) { %>
+<h2>Investissements Par Filière</h2>
+<% investissementParFilière.forEach(investissement => { %>
+<div><%= investissement.titre %></div>
+<% }) %> <% } %>

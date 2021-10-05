@@ -1,0 +1,6 @@
+<h2>Modification Secteur</h2>
+<form action="/secteurs/<%= secteur.id %>?_method=PUT" method="POST">
+  <%- include('_form_fields') %>
+  <a href="/secteurs/<%= secteur.id %> ">Annuler</a>
+  <button type="submit">Modifier</button>
+</form>

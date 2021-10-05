@@ -1,0 +1,12 @@
+<h2>Chercher un pays</h2>
+<form action="/payss" method="GET">
+  <label>Nom</label>
+  <input type="text" name="nom" value="<%= searchOptions.nom %>" />
+  <button type="submit">Chercher</button>
+</form>
+<br />
+<% payss.forEach(pays => { %>
+<div><%= pays.nom %></div>
+<a href="/payss/<%= pays.id %>"> Consulter</a>
+<a href="/payss/<%= pays.id %>/edit"> Modifier </a>
+<%- include('../partials/deleteForm' , { url: `/payss/${pays.id}`}) %> <% }) %>

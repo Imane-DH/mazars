@@ -1,0 +1,6 @@
+<h2>Modification Pays</h2>
+<form action="/payss/<%= pays.id %>?_method=PUT" method="POST">
+  <%- include('_form_fields') %>
+  <a href="/payss/<%= pays.id %> ">Annuler</a>
+  <button type="submit">Modifier</button>
+</form>

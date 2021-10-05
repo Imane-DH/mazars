@@ -1,0 +1,25 @@
+<h2>Chercher un investissement</h2>
+<form action="/investissements" method="GET">
+  <div>
+    <label>Titre</label>
+    <input type="text" name="titre" value="<%= searchOptions.titre %>" />
+  </div>
+  <div>
+    <label>Date de création</label>
+    <input
+      type="date"
+      name="Datedecréation"
+      value="<%= searchOptions.Datedecréation %>"
+    />
+  </div>
+  <div>
+    <label>Pays</label>
+    <input type="text" name="pays" value="<%= searchOptions.pays %>" />
+  </div>
+  <button type="submit">Chercher</button>
+</form>
+<div>
+  <% investissements.forEach(investissement => { %>
+  <div><%= investissement.titre %></div>
+  <% }) %>
+</div>

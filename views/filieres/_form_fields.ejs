@@ -1,0 +1,16 @@
+<div>
+  <label>Nom</label>
+  <input type="text" name="nom" value="<%= filiere.nom %>" />
+</div>
+<div>
+  <label>Date de création </label>
+  <input
+    type="date"
+    name="Datedecreation"
+    value="<%= filiere.Datedecreation == null ? '' : filiere.Datedecreation.toISOString().split('T')[0] %>"
+  />
+</div>
+<div>
+  <label>Commentaire</label>
+  <textarea name="commentaire"><%= filiere.commentaire %></textarea>
+</div>

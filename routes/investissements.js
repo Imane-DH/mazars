@@ -3,9 +3,9 @@ const router = express.Router();
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const Investment = require("../models/investment");
-const Country = require("../models/country");
-const uploadPath = path.join("public", Investment.FilePath);
+const Investissement = require("../models/investissement");
+const Pays = require("../models/pays");
+const uploadPath = path.join("public", Investissement.FilePath);
 const fileMimeTypes = [
   "application/vnd.ms-excel",
   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -21,9 +21,9 @@ const upload = multer({
 // All investments Route
 router.get("/", async (req, res) => {
   try {
-    const investments = await Investment.find({});
-    res.render("investments/index", {
-      investments: investments,
+    const investissements = await Investissement.find({});
+    res.render("investissements/index", {
+      investissements: investissements,
       searchOptions: req.query,
     });
   } catch {
@@ -32,29 +32,30 @@ router.get("/", async (req, res) => {
 });
 
 // New investment Route
-router.get("/new", async (req, res) => {
-  renderNewPage(res, new Investment());
+router.get("/nouveau", async (req, res) => {
+  renderNewPage(res, new Investissement());
 });
 
 // Create investment Route
 router.post("/", upload.single("file"), async (req, res) => {
   const fileName = req.file != null ? req.file.filename : null;
-  const investment = new Investment({
-    title: req.body.title,
-    country: req.body.country,
-    company: req.body.company,
-    CreatedAt: new Date(req.body.CreatedAt),
+  const investissement = new Investissement({
+    titre: req.body.titre,
+    pays: req.body.pays,
+    secteur: req.body.secteur,
+    filière: req.body.filière,
+    date: new Date(req.body.date),
     UplodedfileName: fileName,
     description: req.body.description,
   });
   try {
-    const newInvestment = await Investment.save(); // changed I
-    res.redirect("/investments");
+    const nouveauInvestissement = await Investissement.save();
+    res.redirect("/investissements");
   } catch {
-    if (investment.UplodedfileName != null) {
-      removeInvestmentFile(investment.UplodedfileName);
+    if (investissement.UplodedfileName != null) {
+      removeInvestmentFile(investissement.UplodedfileName);
     }
-    renderNewPage(res, investment, true);
+    renderNewPage(res, investissement, true);
   }
 });
 //STILL NOT WORKING !!!!!!!!!
@@ -64,18 +65,18 @@ function removeInvestmentFile(fileName) {
   });
 }
 
-async function renderNewPage(res, investment, hasError = false) {
+async function renderNewPage(res, investissement, hasError = false) {
   try {
-    const countries = await Country.find({});
+    const pays = await Pays.find({});
     let params = {
-      countries: countries,
-      investment: investment,
+      pays: pays,
+      investissement: investissement,
     };
     ///STILL NOT WORKING !!!!!!!!!!!
-    if (hasError) params = Error("Error Creating Investment"); // j'ai changé ça
-    res.render("investments/new", params);
+    if (hasError) params = Error("Error Creating Investment");
+    res.render("investissements/nouveau", params);
   } catch {
-    res.redirect("/investments");
+    res.redirect("/investissements");
   }
 }
 

@@ -1,0 +1,47 @@
+<div>
+  <label>Titre</label>
+  <input type="text" name="titre" value="<%= investissement.titre %>" />
+</div>
+<div>
+  <label>Pays</label>
+  <select name="pays">
+    <% payss.forEach(pays => { %> <% if (pays.id === investissement.pays) { %>
+    <option selected label="<%= pays.nom %>" value="<%= pays.id %>">
+      <% } else { %>
+    </option>
+
+    <option label="<%= pays.nom %>" value="<%= pays.id %>">
+      <% } %> <% }) %>
+    </option>
+  </select>
+</div>
+<div>
+  <label>Secteur</label>
+  <select name="secteur">
+    <% secteurs.forEach(secteur => { %> <% if (secteur.id ===
+    investissement.secteur) { %>
+    <option selected label="<%= secteur.nom %>" value="<%= secteur.id %>">
+      <% } else { %>
+    </option>
+
+    <option label="<%= secteur.nom %>" value="<%= secteur.id %>">
+      <% } %> <% }) %>
+    </option>
+  </select>
+</div>
+<div>
+  <label> Date de création</label>
+  <input
+    type="date"
+    name="Datedecréation"
+    value="<%= investissement.Datedecréation == null ? '' : investissement.Datedecréation.toISOString().split('T')[0] %>"
+  />
+</div>
+<div>
+  <label>File</label>
+  <input type="file" name="file" />
+</div>
+<div>
+  <label>Description</label>
+  <textarea name="description"><%=investissement.description %></textarea>
+</div>

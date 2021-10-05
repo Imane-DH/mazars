@@ -1,0 +1,8 @@
+<h2><%= secteur.nom %></h2>
+<a href="/secteurs/<%= secteur.id %>/edit">Modifier</a>
+<%- include('../partials/deleteForm', { url: `/secteurs/${secteur.id}`}) %> <%
+if (investissementParSecteur.length > 0) { %>
+<h2>Investissement Par Secteur</h2>
+<% investissementParSecteur.forEach(investissement => { %>
+<div><%= investissement.titre %></div>
+<% }) %> <% } %>
